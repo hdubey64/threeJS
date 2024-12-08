@@ -27,17 +27,28 @@ scene.add(mesh);
 const canvas = document.querySelector("canvas");
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
+// NOTE: For Device Pixcel Ratio
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 const controls = new OrbitControls(camera, renderer.domElement);
+// NOTE: For Look at
 const mouse = {
    x: 0,
    y: 0,
 };
 
+// NOTE: For Look at Function Update
 window.addEventListener("mousemove", function (e) {
    mouse.x = e.clientX / window.innerWidth;
    mouse.y = e.clientY / window.innerHeight;
    // console.log(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+});
+
+// NOTE: For Responsive
+window.addEventListener("resize", function (e) {
+   camera.aspect = window.innerWidth / window.innerHeight;
+   renderer.setSize(window.innerWidth, window.innerHeight);
+   camera.updateProjectionMatrix();
 });
 
 function animate() {
@@ -46,5 +57,4 @@ function animate() {
    mesh.lookAt(new THREE.Vector3(mouse.x - 0.5, -mouse.y + 0.5, 1));
    renderer.render(scene, camera);
 }
-
 animate();
