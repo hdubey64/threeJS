@@ -91,8 +91,11 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Create a Cube
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const geometry = new THREE.BoxGeometry(0.2, 5, 0.2);
+const material = new THREE.MeshBasicMaterial({
+   color: 0x00ff00,
+   wireframe: true,
+});
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
@@ -131,14 +134,13 @@ gui.add(params, "rotationZ", -Math.PI, Math.PI).onChange((value) => {
    cube.rotation.z = value;
 });
 
-// Update Cube Color
 gui.addColor(params, "color").onChange((value) => {
    cube.material.color.set(value);
 });
 
-// Animation Loop
 function animate() {
    requestAnimationFrame(animate);
+   cube.rotation.z += 1.5;
    renderer.render(scene, camera);
 }
 
