@@ -136,8 +136,6 @@ function onPointerMove(event) {
    }
 }
 
-window.addEventListener("mousemove", onPointerMove);
-
 // Add a box geometry
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 const boxMaterial = new THREE.MeshPhysicalMaterial({
